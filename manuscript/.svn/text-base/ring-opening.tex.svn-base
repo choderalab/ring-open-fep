@@ -1,0 +1,248 @@
+ % PRL look and style (easy on the eyes)
+\documentclass[aps,pre,twocolumn,superscriptaddress,nofootinbib]{revtex4-1}
+% Two-column style (for submission/review/editing)
+%\documentclass[aps,preprint,prl,superscriptaddress,showpacs]{revtex4}
+
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{boxedminipage}
+\usepackage{verbatim}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+% The figures are in a figures/ subdirectory.
+\graphicspath{{figures/}}
+
+% italicized boldface for math (e.g. vectors)
+\newcommand{\bfv}[1]{{\mbox{\boldmath{$#1$}}}}
+% non-italicized boldface for math (e.g. matrices)
+\newcommand{\bfm}[1]{{\bf #1}}          
+
+%\newcommand{\bfm}[1]{{\mbox{\boldmath{$#1$}}}}
+%\newcommand{\bfm}[1]{{\bf #1}}
+\newcommand{\expect}[1]{\left \langle #1 \right \rangle}                % <.> for denoting expectations over realizations of an experiment or thermal averages
+
+% vectors
+\newcommand{\x}{\bfv{x}}
+\newcommand{\y}{\bfv{y}}
+\newcommand{\f}{\bfv{f}}
+
+\newcommand{\bfc}{\bfm{c}}
+\newcommand{\hatf}{\hat{f}}
+
+\newcommand{\bTheta}{\bfm{\Theta}}
+\newcommand{\btheta}{\bfm{\theta}}
+\newcommand{\bhatf}{\bfm{\hat{f}}}
+\newcommand{\cov}[1] {\mathrm{cov}\left( #1 \right)}
+\newcommand{\var}[1] {\mathrm{var}\left( #1 \right)}
+\newcommand{\Ept}[1] {{\mathrm E}\left[ #1 \right]}
+\newcommand{\Eptk}[2] {{\mathrm E}_{#1}\left[ #2\right]}
+\newcommand{\T}{\mathrm{T}}                                % T used in matrix transpose
+
+% Commands to force LaTeX to put two figures on a page:
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+\setcounter{totalnumber}{5}
+
+%% DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Relative alchemical free energy calculations involving ring breaking and formation}
+
+\author{John D. Chodera}
+\email[Electronic Address: ]{choderaj@mskcc.org}
+\thanks{Corresponding author.}
+\affiliation{Computational Biology Program, Memorial Sloan-Kettering Cancer Center, New York, NY 10065}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NO ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Relative alchemical free energy calculations promise to be a useful tool in prioritizing synthesis in lead optimization efforts, where small chemical modifications are proposed in an attempt to increase affinity or selectivity.
+These modifications sometimes involve the breaking or formation of (often aromatic) rings relative to the current lead compound, which is challenging for current relative free energy protocols to account for.
+Here, we propose a simple approach to treat chemical transformations involving ring breaking and opening in these calculations.
+In analogy to ``soft-core'' Lennard-Jones interactions, which have proven to be a useful tool for allowing the insertion and deletion of atoms in an efficient manner, ring bonds to be broken or formed proceed from a harmonic bond through a series of softened Morse potentials before being eliminated completely.
+We demonstrate this approach leads to efficient and correct relative free energies in model compounds in explicit solvent simulations.
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+{\color{red}[JDC: Introduce the problem with an example transformation that requires a ring-opening event.]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SOFTENED BONDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Relative free energy calculations involving bond breaking or formation}
+
+\subsection{Merged topology}
+
+We make use of a \emph{merged topology} in which both the initial and final chemical species are represented in a single ``merged'' topology.
+
+To construct the merged topology, we suppose we are given molecules A and B along with a list of corresponding atoms in A and B.
+The merged topology contains three sets of atoms denoted by indices $\mathcal{S}_{A \cap B}$ for the atoms that appeared both in A and B, $\mathcal{S}_A$ for atoms that appear in A and not B, and $\mathcal{S}_B$ for atoms that appear in B and not A.
+
+\subsection{Softened bonds}
+
+In molecular mechanics forcefields such as AMBER~\cite{amber}, CHARMM~\cite{charmm}, and OPLS~\cite{opls}, atoms in ring systems are generally tethered by harmonic bonds of the form,
+\begin{eqnarray}
+U(r) &=& \frac{K}{2} (r - r_0)^2 \label{equation:harmonic-bond}
+\end{eqnarray}
+In order to break a ring system in a relative free energy calculation, the reversible work for turning off a harmonic bond connecting two atoms in the ring $i$ and $j$ must be computed.
+While other terms (such as torsions and electrostatics) are often modulated by the introduction of a linear potential scaling factor $\lambda \in [0,1]$, this approach will not be effective for harmonic bonds because the potential is always of finite range (forbidding complete dissociation) until $\lambda$ is identically zero.
+
+Instead, we can employ another bonded potential implemented by many popular molecular mechanics programs that allows dissociation at large distances---the Morse potential~\cite{morse:phys-rev:1929:morse-potential},
+\begin{eqnarray}
+U(r) &=& D_e [1 - e^{-a (r - r_0)}]^2 \label{equation:morse-bond}
+\end{eqnarray}
+Near $r = r_0$, the Morse potential appears locally quadratic, with force constant $2 D_e a^2$.
+At larger $r$, the bond can dissociate, though a barrier of height $D_e$ must be overcome to fully dissociate.
+Given a fixed $D_e$, we can choose Morse parameters that closely model the original harmonic bond with parameters $\{K, r_0\}$ by selecting,
+\begin{eqnarray}
+a = \sqrt{K / 2 D_e} \label{equation:morse-a}
+\end{eqnarray}
+
+Our scheme should now be apparent. 
+At the fully interacting alchemical state ($\lambda = 1$) for a ring-containing system, we allow the ring to be closed with the standard harmonic bond potential (Eq.~\ref{equation:harmonic-bond}).
+At alchemical intermediate values ($\lambda < 1$), we employ a Morse potential (Eq.~\ref{equation:morse-bond}) for this bond with the same $r_0$, $a = \sqrt{K / 2 D_e}$, and a $D_e$ for each intermediate determined by $D_e = \lambda D_\mathrm{max}$, where $D_\mathrm{max}$ is a maximum dissociation energy that guarantees that $\lambda \approx 1$ is very close in behavior to the harmonic bond form but minimizes the number of alchemical intermediates required to obtain good overlap between intermediates.
+Here, we use $D_\mathrm{max} = 5 \: k_B T$.
+\begin{eqnarray}
+U(r;\lambda) &=& \begin{cases}
+\frac{K}{2} (r - r_0)^2 & \lambda = 1 \\
+D_e(\lambda) [1 - e^{-a (r - r_0)}]^2 & 0 \le \lambda < 1
+\end{cases}
+\end{eqnarray}
+where $D_e(\lambda) = \lambda D_\mathrm{max}$.
+
+\subsection{Nonbonded exclusions and exceptions}
+\label{section:nonbonded-exclusions-and-exceptions}
+
+Many forcefields---such as AMBER, CHARMM, and OPLS---exclude or modify Lennard-Jones and Coulomb interactions between atoms separated by one, two, or three bonds.
+These nonbonded interactions are eliminated or attenuated in the alchemical state where the bond is fully formed (here, $\lambda = 1$) and correspond to standard Lennard-Jones and Coulomb interactions when the bond is fully eliminated ($\lambda = 0$).
+
+These standard interactions (for $\lambda = 0$) are given by,
+\begin{eqnarray}
+U_{elec}(r) &=& C\frac{q_1 q_2}{r} \nonumber \\
+U_{LJ}(r) &=& 4 \epsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]
+\end{eqnarray}
+where $C$ is a constant having units of energy times distance over charge squared, $\epsilon$ is an effective well depth having units of energy, and $\sigma$ is an effective Lennard-Jones radius parameter having units of distance.
+
+When attenuated or eliminated (for $\lambda = 1$), these interactions are given by,
+\begin{eqnarray}
+U_{elec}(r) &=& \eta_{elec} \cdot C\frac{q_1 q_2}{r} \nonumber \\
+U_{LJ}(r) &=& \eta_{LJ} \cdot 4 \epsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]
+\end{eqnarray}
+where $\eta_{elec}$ and $\eta_{LJ}$ are attenuation factors.
+In AMBER, for example, interactions between atoms separated by one or two bonds are excluded ($\eta_{elec} = \eta_{LJ} = 0$), while interactions between atoms separated by three bonds are attenuated ($\eta_{elec} = 1 / 1.2$; $\eta_{LJ} = 1/2$).
+
+Interactions that are attenuated can simply be scaled in a $\lambda$-dependent manner:
+\begin{eqnarray}
+U_{elec} (r;\lambda) &=& [\lambda + (1-\lambda) \eta_{elec}] \cdot U_{elec}(r) \nonumber \\
+U_{LJ} (r; \lambda) &=& [\lambda + (1 - \lambda) \eta_{LJ}] \cdot U_{LJ}(r)
+\end{eqnarray}
+
+For interactions that are excluded when the bond are formed, however, we simply scaling their standard interactions as the bond is removed would cause the same problems that occur when inserting or deleting Lennard-Jones sites in dense solvents.
+We can adopt the same solution here by using soft-core forms of Coulomb and Lennard-Jones functions, available in many software packages:
+\begin{eqnarray}
+U_{SC \cdot elec} (r;\lambda) &=& (1-\lambda) U_{elec}(g(r; \lambda)) \nonumber \\
+U_{SC \cdot LJ} (r; \lambda) &=& (1 - \lambda) U_{LJ}(f(r;\lambda))
+\end{eqnarray}
+where the interatomic distance $r$ is \emph{softened} by functions $g(r)$ and $f(r)$, respectively:
+\begin{eqnarray}
+g(r; \lambda) &=& (\alpha_{elec} \lambda + r^m)^{1/m} \nonumber \\
+f(r; \lambda) &=& (\alpha_{LJ} \lambda + r^n)^{1/n} \nonumber 
+\end{eqnarray}
+recovering the full interactions as $\lambda \rightarrow 1$ and the bond is eliminated.
+AMBER, for example, recommends the use of $\alpha_{LJ} = 0.5 \sigma^6$, $m=6$ and $\alpha_{elec} = 12$ \AA$^2$, $n = 2$.
+
+\subsection{Valence terms}
+
+When a bond is broken, angles, and torsions involving the scissile bond must also be eliminated.
+
+Harmonic angles terms can simply be scaled linearly in energy as $(1 - \lambda)$.
+
+Periodic torsions present in the ring but absent in the broken ring can similarly be scaled linearly in energy as $(1 - \lambda)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ILLUSTRATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{General transformations involving ring breaking or opening}
+
+When a molecule A is transformed into another molecule B involving rings that are broken or formed, some nontrivial bookkeeping is required to determine which force field terms are treated in which ways.
+Parameters must also be changed with $\lambda$ during the course of this transformation (now assumed to go from $\lambda = 0$ for A to $\lambda = 1$ for B).
+We suppose we have already constructed a merged topology containing atom sets $\mathcal{S}_{A}$ (atoms in A and not in B), $\mathcal{S}_{B}$ (atoms in B and not in A), and $\mathcal{S}_{AB}$ (atoms in both A and B).
+
+\subsection{Bonds}
+\begin{itemize}
+  \item Bond parameters (spring constant $K$ and equilibrium distance $r_0$) between atoms in $\mathcal{S}_{AB}$ can be linearly interpolated between parameters from A and B with $\lambda$.
+  \item All other bonds must be converted to soft-core bonds for $0 < \lambda < 1$.  
+  The soft-core bond can also be mixed with a harmonic potential near $\lambda = 0$ or $1$ to improve alchemical overlap.
+\end{itemize}
+
+\subsection{Angles}
+\begin{itemize}
+  \item Angle parameters present in both A and B can be linearly interpolated with $\lambda$.
+  \item Angle terms present in A or B but not both are retained unchanged, except those that span bonds that are broken (formed) which are turned off (on) with $\lambda$ by linearly scaling the energy by $\lambda$ or $(1-\lambda)$ as appropriate.
+\end{itemize}
+
+\subsection{Torsions}
+\begin{itemize}
+  \item Torsion terms present in both A and B should be interpolated in energy, as their periodicities might differ.
+  \item Torsion terms in (A and not B) or (B and not A) are retained unchanged, except those that span bonds that are broken (formed) which are turned off (on) with $\lambda$ by linearly scaling the energy by $\lambda$ or $(1-\lambda)$ as appropriate
+\end{itemize}
+
+\subsection{Nonbonded forces}
+\begin{itemize}
+  \item Particle terms for atoms in $\mathcal{S}_{AB}$ with identical parameters in A and B have their parameters unchanged.
+  \item Particle terms for atoms in $\mathcal{S}_{AB }$ with different parameters in A and B will have their charge ($q$) and Lennard-Jones $\epsilon$ parameters set to zero for $0 < \lambda < 1$, replacing them with softcore Lennard-Jones and soft core Coulomb interactions.  For the functional forms of these softcore interactions, see the AMBER12 manual Eqs. 4.5 and 4.7.  For $\lambda = 0$ or 1, they should have charge and epsilon set to either A or B parameter sets.
+  \item Particle terms for atoms in $\mathcal{S}_A$ should have their Coulomb and Lennard-Jones parameters set to state A for $\lambda = 0$, and should be replaced by softcore interactions for $\lambda > 0$.
+  \item Particle terms for atoms in $\mathcal{S}_B$ should have their Coulomb and Lennard-Jones parameters set to state B for $\lambda = 1$, and should be replaced by softcore interactions for $\lambda < 1$.
+  \item Exception and exclusions between atoms involved in bonds that are broken in the A $\rightarrow$ B transformation are treated as described above in Section.~\ref{section:nonbonded-exclusions-and-exceptions}.  For binds that are formed in this transformation, the opposite scheme is used.
+  \item Exceptions that are preserved in the A $\rightarrow$ B transformation have their effective Coulomb and Lennard-Jones parameters linearly interpolated with $\lambda$.
+\end{itemize}
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ILLUSTRATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Illustration}
+
+\subsection{Null transformations}
+
+An effective way to test the efficiency and correctness of a relative free energy transformation scheme is to consider a \emph{null transformation} in which a molecule is transformed into a chemically equivalent form that does not share the same atom identities in the initial and final states~\cite{pitera-napthalene}.
+While the free energy for this transformation should be identically zero, the statistical error and bias are often non-zero, and can be indicative of errors expected for systems of interest if the molecules and transformations are of typical size.
+
+Here, we consider the null transformations depicted in Figure~\ref{figure:null-transformation-compounds}.
+A ``dual-topology'' approach is used, in which some interacting atoms in state A are transformed into noninteracting ``dummy atoms'' in state B and \emph{vice versa}, while other atoms are preserved during the transformation.
+The bond to be broken or formed is denoted with a slash.
+
+Each system was solvated in a box of TIP3P waters~\cite{tip3p}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acknowledgments}
+JDC acknowledges funding from the Memorial Sloan-Kettering Cancer Center.
+\end{acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{ring-opening}
+
+\end{document}

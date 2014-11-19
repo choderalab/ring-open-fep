@@ -1,0 +1,72 @@
+; Derived from parsing of runfiles/alat.top.orig
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               3               yes             0.5     0.5
+; comb-rule 3 is square-root sigma, the OPLSAA version
+
+[ atomtypes ]
+; eth
+   trappe_ch3   CH3     15.035     0       A    3.75000e-01   0.814818204
+   trappe_ch3s   CH3     15.035     0       A    2.75000e-01   0.814818204
+   trappe_ch3b   CH3     15.035     0       A    4.75000e-01   0.814818204
+
+[ bondtypes ]
+;  i      j     func    b0        D       beta
+;  CH3    CH3      1    0.15400   284512.0  ; 
+; k = 2D a^2, if D = 5, a = 169
+;  CH3    CH3      3     0.15400   5      169 ; 
+; k = 2D a^2, if D = 50, a = 53
+  CH3    CH3      3     0.15400   50      53 ; 
+
+
+[ angletypes ]
+
+
+[ atomtypes ]
+ opls_111  OW      15.99940     0.000       A    3.15061e-01  6.363864e-01
+ opls_112  HW       1.00800     0.000       A    0.00000e-01  0.000000e-01
+
+[ moleculetype ]
+; molname       nrexcl
+SOL             1
+
+[ atoms ]
+1     opls_111  1       SOL              OW             1       -0.834
+2     opls_112  1       SOL             HW1             1        0.417
+3     opls_112  1       SOL             HW2             1        0.417
+
+[ settles ]
+; i     j       funct   length
+1       1       0.09572 0.15139
+
+; added by mrshirts 6/9/03
+[ exclusions ]
+1 2 3
+2 1 3
+3 1 2
+
+
+[ moleculetype ]
+; Name                       nrexcl
+Ethane                 3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB  massB
+     1   trappe_ch3      1   ETH     CH3      1      0.0       15.035    trappe_ch3     0.000      15.035
+     2   trappe_ch3      1   ETH     CH3      1      0.0       15.035    trappe_ch3     0.000      15.035
+     
+[ bonds ]
+;  ai    aj funct         b0        D     beta         b0      D       beta   
+   1      2       3      0.15400    50     53        0.160    10       40
+
+[ angles ] 
+
+[ system ]
+; Name
+Ethane in water
+
+[ molecules ]
+; Compound             #mols
+Ethane      1
+SOL               893
+

@@ -1,0 +1,13 @@
+# Create a benzene system.
+
+# Load parameters and ions.
+parm99 = loadamberparams parm99.dat
+loadOff ions94.lib
+gaff = loadamberparams gaff.dat
+
+# Create receptor.
+benzene = loadmol2 benzene.gaff.mol2
+benzene_params = loadamberparams benzene.frcmod
+saveamberparm benzene benzene.prmtop benzene.crd
+
+quit

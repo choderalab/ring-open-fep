@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ring-open-fep/!svn/ver/1/gromacs/1,2-diethylbenzene
+END
+morse.mdp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/1/gromacs/1,2-diethylbenzene/morse.mdp
+END
+morse.tpr
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/1/gromacs/1,2-diethylbenzene/morse.tpr
+END
+morse.gro
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/1/gromacs/1,2-diethylbenzene/morse.gro
+END
+run.sh
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ring-open-fep/!svn/ver/1/gromacs/1,2-diethylbenzene/run.sh
+END

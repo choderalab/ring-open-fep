@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/ring-open-fep/!svn/ver/19/setup
+END
+parameterize-for-amber.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ring-open-fep/!svn/ver/19/setup/parameterize-for-amber.py
+END
+generate-mol2.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ring-open-fep/!svn/ver/18/setup/generate-mol2.py
+END

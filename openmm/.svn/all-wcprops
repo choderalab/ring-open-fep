@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/ring-open-fep/!svn/ver/20/openmm
+END
+molecules.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/ring-open-fep/!svn/ver/22/openmm/molecules.py
+END
+timeseries.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ring-open-fep/!svn/ver/12/openmm/timeseries.py
+END
+pymbar.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ring-open-fep/!svn/ver/12/openmm/pymbar.py
+END
+benzene-example.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ring-open-fep/!svn/ver/20/openmm/benzene-example.py
+END
+analyze.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/ring-open-fep/!svn/ver/11/openmm/analyze.py
+END
+repex.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/ring-open-fep/!svn/ver/3/openmm/repex.py
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/ring-open-fep/!svn/ver/15/openmm/README
+END
+thermodynamics.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ring-open-fep/!svn/ver/3/openmm/thermodynamics.py
+END

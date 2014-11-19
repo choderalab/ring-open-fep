@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene
+END
+benzene.frcmod
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.frcmod
+END
+benzene.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.xyz
+END
+benzene.gaff.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.gaff.mol2
+END
+benzene.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.xml
+END
+setup.leap.in
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/setup.leap.in
+END
+benzene.prmtop
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.prmtop
+END
+benzene.pdb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.pdb
+END
+benzene.crd
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.crd
+END
+benzene.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ring-open-fep/!svn/ver/11/openmm/examples/benzene/benzene.mol2
+END

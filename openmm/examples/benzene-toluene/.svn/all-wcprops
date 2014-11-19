@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene
+END
+receptor.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/receptor.xml
+END
+toluene.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/toluene.mol2
+END
+toluene.frcmod
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/toluene.frcmod
+END
+toluene.gaff.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/toluene.gaff.mol2
+END
+setup.leap.in
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/setup.leap.in
+END
+complex.prmtop
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/complex.prmtop
+END
+ligand.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/ligand.xyz
+END
+receptor.pdb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/receptor.pdb
+END
+receptor.crd
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/receptor.crd
+END
+ligand.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/ligand.xml
+END
+restraints
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/restraints
+END
+benzene.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/benzene.mol2
+END
+benzene.frcmod
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/benzene.frcmod
+END
+benzene.gaff.mol2
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/benzene.gaff.mol2
+END
+complex.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/complex.xyz
+END
+ligand.pdb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/ligand.pdb
+END
+receptor.prmtop
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/receptor.prmtop
+END
+ligand.crd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/ligand.crd
+END
+complex.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/complex.xml
+END
+setup.sh
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/setup.sh
+END
+complex.pdb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/complex.pdb
+END
+receptor.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/receptor.xyz
+END
+ligand.prmtop
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/ligand.prmtop
+END
+complex.crd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ring-open-fep/!svn/ver/7/openmm/examples/benzene-toluene/complex.crd
+END

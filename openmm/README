@@ -1,0 +1,23 @@
+OpenMM scripts for relative alchemical free energy calculations involving ring-opening/closing.
+
+MANIFEST
+
+benzene-example.py - a simple benzene example that breaks one bond
+analyze.py - analyze results of Hamiltonian exchange
+examples/ - examples directory
+
+repex.py - replica-exchange module
+thermodynamics.py - support module for replica-exchange
+timeseries.py - timeseries analysis (for autocorrelation times)
+pymbar.py - copy of the pyMBAR distribution for MBAR free energy analysis
+
+USAGE
+
+# Run the benzene example (starting from scratch).
+# Note that re-running without deleting repex.nc will simply resume from last consistent snapshot.
+rm -f repex.nc ; python benzene-example.py
+
+# Analyze the simulation and generate PDB files of replica trajectories.
+python analyze.py
+
+

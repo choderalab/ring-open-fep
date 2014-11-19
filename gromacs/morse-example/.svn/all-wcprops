@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ring-open-fep/!svn/ver/1/gromacs/morse-example
+END
+morse.mdp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ring-open-fep/!svn/ver/1/gromacs/morse-example/morse.mdp
+END
+morse.top
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ring-open-fep/!svn/ver/1/gromacs/morse-example/morse.top
+END
+morse.gro
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ring-open-fep/!svn/ver/1/gromacs/morse-example/morse.gro
+END
+run.sh
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ring-open-fep/!svn/ver/1/gromacs/morse-example/run.sh
+END
